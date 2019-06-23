@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cricket</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/indexStyle.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  </head>
+  <body style="background-color:black;height: 100%">
+    <div>
+      <center>
+        <div class="rules">
+          <!--
+            <h1>Rules</h1>
+            <p>1.) This is a single player game.<br /></p>
+          -->
+        </div>
+        <div class="playblock">
+          <h1 style="color:white">Toss</h1>
+          <form name="tossForm">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <input
+                  type="radio"
+                  name="ht"
+                  value="heads"
+                  autocomplete="off"
+                />
+                Heads
+              </label>
+              <label class="btn btn-primary">
+                <input
+                  type="radio"
+                  name="ht"
+                  value="tails"
+                  autocomplete="off"
+                />
+                Tails
+              </label>
+            </div>
+            <br />
+            <br />
+            <br />
+            <input
+              type="button"
+              class="btn"
+              onClick="toss()"
+              value="Let's roll"
+            />
+            <br />
+            <br />
+            <br />
+            <div id="result"></div>
+          </form>
+        </div>
+      </center>
+    </div>
+    <script>
+      var cchoice = "";
+      function toss() {
+        var usrht = tossForm.ht.value;
+        if (usrht == "") {
+          alert("Please select any one side of coin : heads/tails");
+        } else {
+          var uchoice = tossForm.ht.value;
+          var result = Math.random() * 2 > 1 ? "heads" : "tails";
+          if (uchoice == result) {
+            document.getElementById("result").innerHTML =
+              "You won the toss " +
+              "<br>What do you want " +
+              "<div class='btn-group btn-group-toggle' data-toggle='buttons'>" +
+              "<label class='btn btn-primary active'>" +
+              "<input type='radio' name='bb' value='bat' autocomplete='off' checked/>Bat" +
+              "</label>" +
+              "<label class='btn btn-primary'>" +
+              "<input type='radio' name='bb' value='bowl' autocomplete='off' />Bowl" +
+              "</label>" +
+              "</div>" +
+              "<br />" +
+              "<input type='button' onClick='playUsr()' class='btn btn-primary' value='Play' />";
+          } else {
+            cchoice = Math.random() * 2 > 1 ? "bat" : "bowl";
+            document.getElementById("result").innerHTML =
+              "You lost the toss" +
+              "<br>Computer choose to " +
+              cchoice +
+              "<br><input type='button' onClick='playCmp()' class='btn' value='Play' />";
+          }
+        }
+      }
+      function playUsr() {
+        var head = "";
+        var c = tossForm.bb.value;
+        if (c == "") {
+          alert("Please choose to bat/bowl");
+        } else if (c == "bat") {
+          head = "ubat";
+        } else if (c == "bowl") {
+          head = "ubowl";
+        }
+        window.location.href = "scenes/" + head + ".html";
+      }
+      function playCmp() {
+        if (cchoice == "bat") {
+          head = "ubowl";
+        } else {
+          head = "ubat";
+        }
+        window.location.href = "scenes/" + head + ".html";
+      }
+    </script>
+  </body>
+</html>
